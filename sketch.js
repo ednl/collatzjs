@@ -3,6 +3,8 @@
 // https://youtu.be/EYLWxwo1Ed8
 // https://thecodingtrain.com/CodingInTheCabana/002-collatz-conjecture.html
 
+// Enhancement: live drawing, prettier drawing, correct boundaries
+
 const N = 10000;
 const len = 11;
 const thick = 3;
