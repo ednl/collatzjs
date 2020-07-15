@@ -17,7 +17,7 @@ let n = 2;  // n=1 is the root of the tree, first branch is from 1 to 2
 function setup() {
 	createCanvas(1500, 1000);
 	background(bg);
-	stroke(fg, soft);
+	stroke(255, 0, 0, soft);
 	strokeWeight(thick);
 }
 
