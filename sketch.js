@@ -6,20 +6,19 @@
 // Enhancement: live drawing, prettier drawing, correct boundaries
 
 const N = 10000;
+const batch = 40;
+const angle = 0.15;
 const len = 11;
 const thick = 3;
 const branch = len - thick + 1;
-const angle = 0.15;
 const soft = 10;
-const batch = 50;
-const fg = 255;
 const bg = 51;
 let n = 2;  // n=1 is the root of the tree, first branch is from 1 to 2
 
 function setup() {
 	createCanvas(1500, 1000);
 	background(bg);
-	stroke(255, 0, 0, soft);
+	stroke(color(255, 51, 102, soft));
 	strokeWeight(thick);
 }
 
@@ -29,20 +28,21 @@ function draw() {
 	translate(width / 2, height - 25);
 	scale(1, -1);
 
-	// Draw multiple branches every frame
+	// Draw multiple branches in every frame to speed things up
 	for (let dummy = 0; dummy < batch; ++dummy) {
 
+		// Check boundary because (N-1) % batch != 0
 		if (n <= N) {
 
-			// Calculate sequence of n downto 1
+			// Collatz sequence of n downto 1 (maybe; it's still a conjecture)
 			const seq = [];
 			let i = n++;
 			while (i != 1) {
 				seq.push(i);
-				i = i % 2 ? (i * 3 + 1) / 2 : i / 2;  // (i*3+1)/2 for fewer even numbers
+				i = i % 2 ? (i * 3 + 1) / 2 : i / 2;  // extra division by 2 for fewer even numbers
 			}
 
-			// Draw the complete branch bottom up
+			// Draw the branch from the root up
 			seq.reverse();
 			push();
 			for (const i of seq) {
